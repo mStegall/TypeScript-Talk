@@ -10,6 +10,8 @@ export function songs(req: express.Request, res: express.Response) {
 }
 
 export function postSong(req: express.Request, res: express.Response) {
+    console.log(req.body);
+
     let newSong: song = {
         album: req.body.album,
         band: req.body.band,
@@ -17,5 +19,7 @@ export function postSong(req: express.Request, res: express.Response) {
     }
 
     addSong(newSong);
+
+    res.sendStatus(200);
 }
 
