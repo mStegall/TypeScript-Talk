@@ -1,18 +1,7 @@
 "use strict";
 const express = require('express');
-const songs_1 = require('./songs');
+const songController_1 = require('./songController');
 exports.router = express.Router();
-exports.router.get('/', function (req, res) {
-    let songs = songs_1.readSongs();
-    let bands = songs.map(song => song.band);
-    res.json(bands);
-});
-exports.router.get('/addSong', function (req, res) {
-    let newSong = {
-        album: 'test',
-        band: 'hello',
-        song: 'Terrible'
-    };
-    songs_1.addSong(newSong);
-});
+exports.router.get('/songs', songController_1.songs);
+exports.router.post('/songs', songController_1.postSong);
 //# sourceMappingURL=router.js.map
