@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { addSong, readSongs, song } from './songs';
 
-export function songs(req: express.Request, res: express.Response) {
+export let songs: express.RequestHandler = function (req, res) {
     let songs = readSongs()
 
     let ratings = songs.map(song => song.rating * 5)
@@ -9,9 +9,7 @@ export function songs(req: express.Request, res: express.Response) {
     res.json(bands);
 }
 
-export function postSong(req: express.Request, res: express.Response) {
-    console.log(req.body);
-
+export let postSong: express.RequestHandler = function (req, res) {
     let newSong: song = {
         album: req.body.album,
         band: req.body.band,
@@ -20,6 +18,6 @@ export function postSong(req: express.Request, res: express.Response) {
 
     addSong(newSong);
 
-    res.sendStatus(200);
+    res.json(newSong);
 }
 
